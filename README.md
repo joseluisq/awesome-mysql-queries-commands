@@ -9,14 +9,15 @@
 888       888  "Y88888  "Y8888P"   "Y888888"  88888888 
                    888                   Y8b           
               Y8b d88P                                 
-               "Y88P"          🐬 Awesome MySQL useful queries and commands   
+               "Y88P"               🐬 Awesome MySQL useful queries and commands   
 ```
 
 # Awesome MySQL Queries and Commands [![](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
 
-__Note:__ Of course, this document needs your help, so [consider contributing](contributing.md).
 
 > A curated list of awesome [MySQL](https://www.mysql.com/) useful [queries](https://dev.mysql.com/doc/refman/8.0/en/examples.html) and [commands](https://dev.mysql.com/doc/refman/8.0/en/mysql-commands.html). Inspired by [awesome-mysql](https://github.com/shlomi-noach/awesome-mysql) and [awesome-bash-commands](https://github.com/joseluisq/awesome-bash-commands).
+
+_🏅 Of course, this document needs your help, so [consider contributing](contributing.md)._
 
 #### Table of Contents
 - [Commands](#commands)
