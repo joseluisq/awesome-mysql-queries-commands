@@ -35,7 +35,7 @@ _🏅 Of course, this document needs your help, so [consider contributing](contr
 
 ### Data import
 
-### Script file
+#### Script file
 
 ```sh
 mysql -h host -P 3306 -u username -p --default_character_set utf8 database_name < mysql_script.sql
@@ -43,7 +43,7 @@ mysql -h host -P 3306 -u username -p --default_character_set utf8 database_name 
 
 ### Data export
 
-### Script file
+#### Script file
 
 ```sh
 mysqldump -h localhost -u username -p database_name > ./mysql_script.sql
@@ -62,7 +62,7 @@ mysqldump \
     "database_name" > database_script.sql
 ```
 
-### GZIP script file
+#### GZIP script file
 
 ```sh
 mysqldump -h localhost -u username -p database_name | gzip -c > tables.sql.gz
@@ -87,7 +87,7 @@ Use `--single-transaction` if you got an mysqldump error (because you lack privi
 mysqldump -h localhost -u username -p database_name --single-transaction | gzip -c > tables.sql.gz
 ```
 
-### Script file with tables only
+#### Script file with tables only
 
 ```sh
 mysqldump -h localhost -u username -p database_name table_name1 table_name2 > mydb_tables.sql
