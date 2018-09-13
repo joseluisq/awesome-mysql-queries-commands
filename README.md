@@ -138,6 +138,16 @@ ALTER USER 'username'@'localhost' IDENTIFIED BY 'my_new_password';
 SELECT code, COUNT(code) duplicates FROM client GROUP BY code HAVING duplicates > 1;
 ```
 
+#### Select one day ago records
+
+```sql
+SELECT * 
+FROM users
+WHERE
+  `registered` >= CONCAT(SUBDATE(CURDATE(), 1), ' 00:00:00') AND 
+  `registered` < CONCAT(CURDATE(), ' 00:00:00')
+```
+
 ## Other Awesome Lists
 - [awesome-mysql](https://github.com/shlomi-noach/awesome-mysql)
 - [awesome-bash-commands](https://github.com/joseluisq/awesome-bash-commands)
