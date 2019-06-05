@@ -124,6 +124,14 @@ GRANT Alter, Alter Routine, Create, Create Routine, Create Temporary Tables,
 
 _Note: The above query uses `mysql_native_password` more info at [Native Pluggable Authentication](https://dev.mysql.com/doc/refman/8.0/en/native-pluggable-authentication.html)_
 
+#### Create a user with specific database privileges
+
+```sql
+CREATE USER `my_user`@`%` IDENTIFIED WITH mysql_native_password BY 'my_password';
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE TEMPORARY TABLES, EXECUTE
+      ON `my_database`.* TO `my_user`@`%` WITH GRANT OPTION;
+```
+
 #### Change an user password
 
 ```sql
