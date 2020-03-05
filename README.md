@@ -110,7 +110,7 @@ mysqldump \
 
 ### Users and privileges
 
-#### Create a root user equivalent
+#### Create a root user equivalent for backward compatibility
 
 ```sql
 CREATE USER `my_root_user`@`%` IDENTIFIED WITH mysql_native_password BY 'my_root_pwd';
@@ -118,11 +118,12 @@ CREATE USER `my_root_user`@`%` IDENTIFIED WITH mysql_native_password BY 'my_root
 GRANT Alter, Alter Routine, Create, Create Routine, Create Temporary Tables, 
     Create User, Create View, Delete, Drop, Event, Execute, File, Grant Option, 
     Index, Insert, Lock Tables, Process, References, Reload, Replication Client, 
-    Replication Slave, Select, Show Databases, Show View, Shutdown, Trigger, 
-    Update ON *.* TO `my_root_user`@`%`;
+    Replication Slave, Select, Show Databases, Show View, Shutdown, Trigger, Update,
+    Super, Create Tablespace
+    ON *.* TO `my_root_user`@`%`;
 ```
 
-_Note: The above query uses `mysql_native_password` more info at [Native Pluggable Authentication](https://dev.mysql.com/doc/refman/8.0/en/native-pluggable-authentication.html)_
+**Note:** The above query creates a user using [Native Pluggable Authentication](https://dev.mysql.com/doc/refman/8.0/en/native-pluggable-authentication.html). It can useful for backward compatibility MySQL clients. Due [Caching SHA-2 Pluggable Authentication](https://dev.mysql.com/doc/refman/8.0/en/caching-sha2-pluggable-authentication.html) is the default authentication plugin on __MySQL 8__.
 
 #### Create a user with specific database privileges
 
@@ -131,6 +132,8 @@ CREATE USER `my_user`@`%` IDENTIFIED WITH mysql_native_password BY 'my_password'
 GRANT SELECT, INSERT, UPDATE, DELETE, CREATE TEMPORARY TABLES, EXECUTE
       ON `my_database`.* TO `my_user`@`%` WITH GRANT OPTION;
 ```
+
+_Note: User above is an example-purpose only._
 
 #### Change an user password
 
