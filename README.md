@@ -135,6 +135,12 @@ GRANT SELECT, INSERT, UPDATE, DELETE, CREATE TEMPORARY TABLES, EXECUTE
 
 _Note: User above is an example-purpose only._
 
+#### Modify specific user privileges
+
+```sql
+GRANT SELECT, INSERT, UPDATE, DELETE ON *.* TO 'root2'@'%';
+```
+
 #### Change an user password
 
 ```sql
