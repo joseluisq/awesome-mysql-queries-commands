@@ -30,6 +30,7 @@ _🏅 Of course, this document needs your help, so [consider contributing](contr
     - [Delete](#delete)
     - [Triggers](#triggers)
     - [Store procedures](#store-procedures)
+    - [Utilities](#utilities)
 
 ## Commands
 
@@ -163,6 +164,48 @@ FROM users
 WHERE
   `registered` >= CONCAT(SUBDATE(CURDATE(), 1), ' 00:00:00') AND 
   `registered` < CONCAT(CURDATE(), ' 00:00:00')
+```
+
+### Utilities
+
+#### Clean all tables of one existing database
+
+Those queries create a database if doesn't exist (optional) and then *removes all tables of one specified database*. No root privileges are required, only make sure that the user which executes those queries has [enough privileges](#create-a-user-with-specific-database-privileges) for that particular database.
+
+_**Warning:** This process cleans up the database removing all existing tables permanently. So make sure to do all necessary tests in a development environment first._
+
+```sql
+-- -----------------------------------------------------
+-- `my_database` clean up process
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- 1. Create a new `my_database` database if doesn't exits 
+-- This is optional but requires extra privileges
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `my_database` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
+
+-- -----------------------------------------------------
+-- 2. Remove all tables of `my_database` database
+-- -----------------------------------------------------
+SET FOREIGN_KEY_CHECKS = 0;
+SET GROUP_CONCAT_MAX_LEN=32768;
+
+USE `my_database`;
+
+SET @tables = NULL;
+SELECT GROUP_CONCAT('`', table_name, '`') INTO @tables
+FROM information_schema.tables
+WHERE table_schema = (SELECT DATABASE());
+
+SELECT IFNULL(@tables, 'dummy') INTO @tables;
+
+SET @tables = CONCAT('DROP TABLE IF EXISTS ', @tables);
+PREPARE stmt FROM @tables;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
+SET FOREIGN_KEY_CHECKS = 1;
 ```
 
 ## Other Awesome Lists
