@@ -208,6 +208,28 @@ DEALLOCATE PREPARE stmt;
 SET FOREIGN_KEY_CHECKS = 1;
 ```
 
+#### Show databases size in MB or GB
+
+**Databases size in GBs**
+
+```sql
+SELECT
+    table_schema "DB_NAME",
+    SUM(ROUND(((DATA_LENGTH + INDEX_LENGTH) / 1024 / 1024 / 1024), 2)) AS "GB"
+FROM information_schema.tables
+GROUP BY table_schema;
+```
+
+**Databases size in MBs**
+
+```sql
+SELECT
+    table_schema "DB_NAME",
+    SUM(ROUND(((DATA_LENGTH + INDEX_LENGTH) / 1024 / 1024), 2)) AS "MB"
+FROM information_schema.tables
+GROUP BY table_schema;
+```
+
 ## Other Awesome Lists
 - [awesome-mysql](https://github.com/shlomi-noach/awesome-mysql)
 - [awesome-bash-commands](https://github.com/joseluisq/awesome-bash-commands)
@@ -219,4 +241,4 @@ Please check out [the contribution file](contributing.md).
 
 [![CC0](http://i.creativecommons.org/p/zero/1.0/88x31.png)](http://creativecommons.org/publicdomain/zero/1.0/)
 
-To the extent possible under law, [José Luis Quintana](http://git.io/joseluisq) has waived all copyright and related or neighboring rights to this work.
+To the extent possible under law, [Jose Quintana](http://git.io/joseluisq) has waived all copyright and related or neighboring rights to this work.
