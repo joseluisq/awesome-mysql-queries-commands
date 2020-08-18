@@ -261,6 +261,20 @@ SELECT * FROM performance_schema.events_statements_summary_global_by_event_name 
 ORDER BY t.COUNT_STAR DESC;
 ```
 
+#### Show tables size of specific database in GBs
+
+```sql
+SELECT
+    table_schema AS `Database`,
+    table_name AS `Table`,
+    table_rows AS "Rows",
+    ROUND(((data_length + index_length) / 1024 / 1024/ 1024), 2) SIZE_GB
+FROM information_schema.TABLES
+WHERE table_schema = DATABASE()
+ORDER BY SIZE_GB DESC
+LIMIT 300;
+```
+
 ## Other Awesome Lists
 - [awesome-mysql](https://github.com/shlomi-noach/awesome-mysql)
 - [awesome-bash-commands](https://github.com/joseluisq/awesome-bash-commands)
