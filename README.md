@@ -230,6 +230,14 @@ FROM information_schema.tables
 GROUP BY table_schema;
 ```
 
+#### Show status and open database connections
+
+```sql
+SHOW GLOBAL STATUS LIKE "%conn%";
+SHOW GLOBAL STATUS LIKE '%onn%';
+SHOW GLOBAL STATUS LIKE '%Connection_errors%';
+```
+
 ## Other Awesome Lists
 - [awesome-mysql](https://github.com/shlomi-noach/awesome-mysql)
 - [awesome-bash-commands](https://github.com/joseluisq/awesome-bash-commands)
