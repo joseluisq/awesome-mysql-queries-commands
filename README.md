@@ -238,6 +238,22 @@ SHOW GLOBAL STATUS LIKE '%onn%';
 SHOW GLOBAL STATUS LIKE '%Connection_errors%';
 ```
 
+#### Show performance schema information per query digest
+
+```sql
+SELECT
+    schema_name AS "Database",
+    digest_text AS "Query diggest",
+    count_star AS "Executed times",
+    avg_timer_wait AS "Executed average (picoseconds)",
+    ROUND((avg_timer_wait / 1000 / 1000 / 1000 / 1000), 2) AS "Executed average (seconds)",
+    query_sample_text AS "Query sample",
+    query_sample_seen AS "Query sample seen"
+FROM performance_schema.events_statements_summary_by_digest
+ORDER BY avg_timer_wait DESC
+LIMIT 15;
+```
+
 ## Other Awesome Lists
 - [awesome-mysql](https://github.com/shlomi-noach/awesome-mysql)
 - [awesome-bash-commands](https://github.com/joseluisq/awesome-bash-commands)
