@@ -214,20 +214,20 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 ```sql
 SELECT
-    table_schema "DB_NAME",
+    TABLE_SCHEMA "DB_NAME",
     SUM(ROUND(((DATA_LENGTH + INDEX_LENGTH) / 1024 / 1024 / 1024), 2)) AS "GB"
-FROM information_schema.tables
-GROUP BY table_schema;
+FROM information_schema.TABLES
+GROUP BY TABLE_SCHEMA;
 ```
 
 **Databases size in MBs**
 
 ```sql
 SELECT
-    table_schema "DB_NAME",
+    TABLE_SCHEMA "DB_NAME",
     SUM(ROUND(((DATA_LENGTH + INDEX_LENGTH) / 1024 / 1024), 2)) AS "MB"
-FROM information_schema.tables
-GROUP BY table_schema;
+FROM information_schema.TABLES
+GROUP BY TABLE_SCHEMA;
 ```
 
 #### Show status and open database connections
@@ -242,15 +242,15 @@ SHOW GLOBAL STATUS LIKE '%Connection_errors%';
 
 ```sql
 SELECT
-    schema_name AS "Database",
-    digest_text AS "Query diggest",
-    count_star AS "Executed times",
-    avg_timer_wait AS "Executed average (picoseconds)",
-    ROUND((avg_timer_wait / 1000 / 1000 / 1000 / 1000), 2) AS "Executed average (seconds)",
-    query_sample_text AS "Query sample",
-    query_sample_seen AS "Query sample seen"
+    SCHEMA_NAME AS "Database",
+    DIGEST_TEXT AS "Query diggest",
+    COUNT_STAR AS "Executed times",
+    AVG_TIMER_WAIT AS "Executed average (picoseconds)",
+    ROUND((AVG_TIMER_WAIT / 1000 / 1000 / 1000 / 1000), 2) AS "Executed average (seconds)",
+    QUERY_SAMPLE_TEXT AS "Query sample",
+    QUERY_SAMPLE_SEEN AS "Query sample seen"
 FROM performance_schema.events_statements_summary_by_digest
-ORDER BY avg_timer_wait DESC
+ORDER BY AVG_TIMER_WAIT DESC
 LIMIT 15;
 ```
 
@@ -261,17 +261,17 @@ SELECT * FROM performance_schema.events_statements_summary_global_by_event_name 
 ORDER BY t.COUNT_STAR DESC;
 ```
 
-#### Show tables size of specific database in GBs
+#### Show tables size of current database in GBs
 
 ```sql
 SELECT
-    table_schema AS `Database`,
-    table_name AS `Table`,
-    table_rows AS "Rows",
-    ROUND(((data_length + index_length) / 1024 / 1024/ 1024), 2) SIZE_GB
+    TABLE_SCHEMA,
+    TABLE_NAME,
+    TABLE_ROWS,
+    ROUND(((DATA_LENGTH + INDEX_LENGTH) / 1024 / 1024/ 1024), 2) TABLE_SIZE_GB
 FROM information_schema.TABLES
-WHERE table_schema = DATABASE()
-ORDER BY SIZE_GB DESC
+WHERE TABLE_SCHEMA = DATABASE()
+ORDER BY TABLE_SIZE_GB DESC
 LIMIT 300;
 ```
 
