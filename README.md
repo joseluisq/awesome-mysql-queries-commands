@@ -254,6 +254,13 @@ ORDER BY avg_timer_wait DESC
 LIMIT 15;
 ```
 
+#### Show a summary of current and recent statement events information (picoseconds)
+
+```sql
+SELECT * FROM performance_schema.events_statements_summary_global_by_event_name AS t
+ORDER BY t.COUNT_STAR DESC;
+```
+
 ## Other Awesome Lists
 - [awesome-mysql](https://github.com/shlomi-noach/awesome-mysql)
 - [awesome-bash-commands](https://github.com/joseluisq/awesome-bash-commands)
